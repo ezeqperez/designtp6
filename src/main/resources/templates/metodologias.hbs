@@ -1,0 +1,60 @@
+{{# partial "contenido" }}	  
+<div class="container">
+	<div class="inline" style="width:100%;float:right;align-content: flex-end;display: flex;">
+		<h3 style="padding-right:20px;flex:auto">Aplicar metodología</h3>
+        <a class="btn" href="/metodologia">Nueva Metodologia</a>
+  	</div>
+  	<br>
+  	<br>
+	<script> 
+		function submitForm(id) {
+		    document.getElementById("metodologia_id").value = id
+		}
+		function validateForm() {
+    		var periodo = document.forms["aplicarForm"]["periodo"].value;
+    		var semestre = document.forms["aplicarForm"]["semestre"].value;
+    		if (periodo == "") {
+        		alert("El campo periodo es obligatorio");
+        		return false;
+    		}
+    		if (semestre == "") {
+        		alert("El campo semestre es obligatorio");
+        		return false;
+    		}
+    		return true;
+		}
+	</script>
+  	<br>
+	<form name="aplicarForm" action="/aplicarmetodologias" method="POST" onsubmit="return validateForm()">
+		<div class="inline" style="width:95%;float:left">
+			<label for="periodo" style="width:10%;">Periodo</label>
+			<input id="periodo" type="text" aria-label="periodo" aria-describedby="basic-addon1" name="periodo" style="width:25%">
+			<label for="semestre" style="width:10%;padding-left:20px">Semestre</label>
+			<input id="semestre" type="text" aria-label="semestre" aria-describedby="basic-addon1" name="semestre" style="width:25%">
+		</div>
+		<input id="metodologia_id" type="hidden" name="id" value="">
+		<br>
+		<br>
+	  	<div class="col-md-12" style="padding-top:10px; height:40%">
+			<table class="table table-hover">
+				<thead class="thead-default">
+					<tr>
+						<th></th>
+						<th>Nombre metodología</th>
+					<tr>
+				</thead>
+				<tbody class="scrollable">
+				{{#metodologias}}
+					<tr>
+						<th scope="row" width="10%"><button class="btn" type="submit" onclick='submitForm({{id}})'>Aplicar</button></th>
+						<td>{{nombre}}</td>
+					</tr>
+				{{/metodologias}}
+				</tbody>
+			</table>
+		</div>
+	</form>
+</div>	
+{{/partial}}
+				
+{{> main_layout.hbs }}

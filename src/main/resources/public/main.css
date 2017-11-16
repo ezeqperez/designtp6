@@ -1,0 +1,102 @@
+.scrollable{
+    overflow-y: scroll;
+    height: 180px;
+    width: 100%;
+    position: absolute;
+}
+
+.common{
+    background-color: #A5C7FF;
+    height:100px;
+}
+
+.navbar-custom {
+    color: #FFFFFF;
+    background-color: #CC3333;
+}
+
+.background{
+    background-color: #A5C7FF
+}
+
+.btn {
+    background: #B47708;
+    border-radius: 9px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 20px 10px 20px;
+    float: right;
+}
+
+.btn:hover {
+    background: #875906;
+}
+
+
+.titleFont{
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    padding-top: 40px;
+    padding-left: 40px;
+}
+
+.tableFont{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.normalFont{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+.formLogin{
+    margin-top: 30px;
+}
+
+.footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 30px;
+    color: #FAFAFA;
+}
+
+
+.cabecera {
+	margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    text-align: center;
+    height: 75px;
+    line-height: 75px;
+}
+
+
+.mainTitle {
+	color: black;
+}
+
+
+.iconoInput { 
+    float: left;
+}
+
+div.inline { float:left; }
+
+.container{
+    background-color: #FAFAFA;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 40px;
+    margin-left: 30px;
+    border-radius: 25px;
+}
+
+
+
+

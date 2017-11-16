@@ -1,0 +1,58 @@
+<html>
+  	<head>
+    	<title>Gestor de Cuentas</title>
+  	</head>
+  	<body>
+  		<script>
+			function validateForm() {
+	    		var email = document.forms["loginForm"]["email"].value;
+	    		var contrasenia = document.forms["loginForm"]["contrasenia"].value;
+	    		if (email == "") {
+	        		alert("Ingrese email");
+	        		return false;
+	    		}
+	    		if (contrasenia == "") {
+	        		alert("Falta la contraseña");
+	        		return false;
+	    		}
+	    		return true;
+			}
+		</script>
+  	
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<div class="common">
+			<h1 class="titleFont">Bienvenido</h1>
+		</div>
+		<form class="formLogin" action="/login" method="POST" name="loginForm" onsubmit="return validateForm()">
+			<div style="height:65%; width:50%; margin:0 auto;">
+				<div class="card">
+		  			<div class="card-header">
+                        <hi class="normalFont">Iniciar sesion</hi>
+                    </div>
+		  			<div class="card-body">
+		    			<h4 class="tableFont">Email</h4>
+						<i class="material-icons" for="email" style="float:left;width:10%;">email</i>
+						<input type="text" aria-label="email" aria-describedby="basic-addon1" name="email" style="width:90%">
+        				<br>
+        				<br>
+        				<h4 class="tableFont">Contraseña</h4>
+						<i class="material-icons" for="contrasenia" style="float:left;width:10%;">person pin</i>
+						<input type="password" aria-label="Password" aria-describedby="basic-addon1" name="contrasenia" style="width:90%">
+		    			<br>
+		    			<br>
+                        <button id="submitButton" type="submit" class="btn">Iniciar sesion</button>
+		  			</div>
+				</div>
+			</div>
+		</form>
+		<footer>
+    		<p class="footer" style="color:darkgray">
+      			&copy; 2017 - Gestor de Cuentas - Grupo 21
+    		</p>
+  		</footer>
+  	</body>
+</html>

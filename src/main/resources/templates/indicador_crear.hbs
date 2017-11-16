@@ -1,0 +1,42 @@
+{{# partial "contenido" }}	  
+<div class="container">
+	<h3>Crear indicador</h3> 
+	<br>
+	<script>
+		function validateForm() {
+    		var nombre = document.forms["crearForm"]["nombre"].value;
+    		var ecuacion = document.forms["crearForm"]["ecuacion"].value;
+    		if (nombre == "") {
+        		alert("El nombre es obligatorio");
+        		return false;
+    		}
+    		if (ecuacion == "") {
+        		alert("La ecuacion es obligatorio");
+        		return false;
+    		}
+    		return true;
+		}
+	</script>
+	<form name="crearForm" action="/indicador" method="POST" onsubmit="return validateForm()">
+		<div style="height:65%; width:50%; margin:0 auto;">
+			<div class="card">
+	  			<div class="card-header">
+	    			Nuevo Indicador
+	  			</div>
+				<div class="card-body">
+					<h4 class="card-title">Nombre</h4>
+					<input type="text" aria-label="nombre" aria-describedby="basic-addon1" name="nombre" style="width:60%; margin-left:60px">
+					<br>
+					<br>
+					<h4 class="card-title">Ecuacion</h4>
+					<input type="text" aria-label="ecuacion" aria-describedby="basic-addon1" name="ecuacion" style="width:60%; margin-left:60px">
+					<br>
+					<br>
+					<input id="submitButton" type="submit" style="float: right;" value="Guardar">
+				</div>
+			</div>
+		</div>
+	</form>	
+{{/partial}}
+				
+{{> main_layout.hbs }}

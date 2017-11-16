@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
+    version='2.0'> 
+  
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	
+    	<class>org.grupo21.Model.Interfaces.CondicionInterface</class>
+    	<class>org.grupo21.Model.CondicionIgual</class>
+    	<class>org.grupo21.Model.CondicionMayor</class>
+    	<class>org.grupo21.Model.CondicionMayorIgual</class>
+    	<class>org.grupo21.Model.CondicionMenor</class>
+    	<class>org.grupo21.Model.CondicionMenorIgual</class>
+        <class>org.grupo21.Model.Indicador</class>
+        <class>org.grupo21.Model.Metodologia</class>
+        <class>org.grupo21.Model.Empresa</class>
+        <class>org.grupo21.Model.Cuenta</class>
+        <class>org.grupo21.Model.Usuario</class>
+    	 
+        <properties> 
+	    <property name="hibernate.archive.autodetection" value="class"/>        
+        
+            <!-- property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/design" />
+            <property name="hibernate.connection.username" value="root" /> 
+            <property name="hibernate.connection.password" value="root" /--> 
+
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 
+            <property name="hibernate.connection.username" value="sa" /> 
+            <property name="hibernate.connection.password" value="" /> 
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+
+                            
+            <property name="hibernate.show_sql" value="true" /> 
+            <property name="hibernate.format_sql" value="true" /> 
+            <property name="use_sql_comments" value="true" /> 
+            <property name="hibernate.hbm2ddl.auto" value="update" /> 
+        </properties>
+          
+    </persistence-unit> 
+  
+</persistence>

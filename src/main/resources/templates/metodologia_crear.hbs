@@ -1,0 +1,67 @@
+{{# partial "contenido" }}	  
+<div class="container">
+	<h3>Crear metodología</h3> 
+	<br>
+	<script>
+		function validateGuardarForm() {
+			var rows = document.getElementById("tableCondicion").getElementsByTagName("tr").length;
+    		var nombre = document.forms["guardarForm"]["nombre"].value;
+    		if (nombre == "") {
+        		alert("El nombre es obligatorio");
+        		return false;
+    		}
+    		if (rows <= 2) {
+        		alert("Debe agregar al menos una condicion ");
+        		return false;
+    		}
+    		return true;
+		}
+		function validateAgregarCondicionForm() {
+    		var condicion = document.forms["agregarCondicion"]["condicion"].value;
+    		if (condicion == "") {
+        		alert("La condicion es obligatoria");
+        		return false;
+    		}
+    		return true;
+		}
+	</script>
+	<form name="guardarForm" action="/metodologia" method="POST" onsubmit="return validateGuardarForm()">
+		<div class"inline" style="width:95%;float:left">
+			<label for="nombre" style="width:10%;">Nombre</label>
+			<input id="nombre" type="text" aria-label="nombre" aria-describedby="basic-addon1" name="nombre" style="width:25%">
+			<input id="submitButton" type="submit" value="Guardar">
+		</div>
+	</form>
+	<form name="agregarCondicion" action="/condicion" method="POST"  onsubmit="return validateAgregarCondicionForm()">
+		<div class"inline" style="width:95%;float:left">
+			<label for="condicion" style="width:10%;">Condicion</label>
+			<input id="condicion" type="text" aria-label="condicion" aria-describedby="basic-addon1" name="condicion" style="width:25%">
+			<input id="submitButton" type="submit" value="Agregar">
+		</div>
+	</form>
+	<br><br><br>
+	<div class="col-md-12" style="padding-top:10px; height:40%">
+			<table class="table table-bordered table-inverse" id="tableCondicion" name="tableCondicion">
+				<thead>
+					<tr>
+						<th>
+							<label style="float:left">Condiciones</label>
+							<form id="deleteForm" action="/condiciones" method="POST">
+								<button class="btn btn-primary" style="float:right" type="submit">LIMPIAR</button>
+							</form>
+						</th>
+					<tr>
+				</thead>
+				<tbody>
+				{{#condiciones}}
+					<tr>
+						<td>{{condicion}}</td>
+					</tr>
+				{{/condiciones}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{{/partial}}
+				
+{{> main_layout.hbs }}

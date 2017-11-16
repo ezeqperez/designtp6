@@ -1,0 +1,250 @@
+options
+{
+  STATIC = false;
+  JDK_VERSION = "1.5";
+}
+
+PARSER_BEGIN(Escaner)
+package org.grupo21.Escaner;
+import org.grupo21.Repositories.IndicadoresRepo;
+import org.grupo21.Model.*;
+import org.grupo21.Model.Interfaces.*;
+
+public class Escaner
+{
+  private IndicadoresRepo _context = null;
+
+  public void setContext(IndicadoresRepo p_context)
+  {
+    this._context = p_context;
+  }
+}
+
+PARSER_END(Escaner)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  < ADD : ("+") >
+| < SUB : ("-") >
+| < MUL : ("*") >
+| < DIV : ("/") >
+| < IGU : ("=") >
+| < LBR : ("(") >
+| < RBR : (")") >
+| < INT : ([ "0"-"9" ])+ >
+| < INVERSION : ("inversion_inicial") >
+| < INGRESOSCONT : ("ingresos_continuos") >
+| < INGRESOSDISCONT : ("ingresos_discontinuos") >
+| < DIVIDENDOS : ("dividendos") >
+| < DEUDA : ("deuda") >
+| < MARGENVENTA : ("margen_venta") >
+| < ROA : ("roa") >
+| < TIR : ("tir") >
+| < RECUPEROINV : ("recupero_inversion") >
+| < CAPITAL : ("capital_total") >
+| < INDICADOR : ([ "a"-"z", "A"-"Z", "0"-"9" ])* ([ "a"-"z", "A"-"Z" ]) ([ "a"-"z", "A"-"Z", "0"-"9" ])* >
+| < LOWER : ("<") >
+| < GREATER : (">") >
+| < LOWEREQUAL : ("<=") >
+| < GREATEREQUAL : (">=") >
+| < EQUAL : ("==") >
+}
+
+IndicadorInterface parsear() :
+{
+}
+{
+  {
+    return new Indicador(nombre(), asignacion());
+  }
+}
+
+CondicionInterface parsearCondicion() :
+{
+}
+{
+  {
+    return condicion();
+  }
+}
+
+IndicadorInterface expr() :
+{
+  IndicadorInterface a;
+  IndicadorInterface result = null;
+}
+{
+  a = term()
+  (
+    < ADD >
+    {
+      result = new Suma(a, expr());
+    }
+  | < SUB >
+    {
+      result = new Resta(a, expr());
+    }
+  )*
+  {
+    if (result != null) 
+    return result;
+    return a;
+  }
+}
+
+IndicadorInterface term() :
+{
+  IndicadorInterface a;
+  IndicadorInterface result = null;
+}
+{
+  a = factor()
+  (
+    < MUL >
+    {
+      result = new Multiplicacion(a, term());
+    }
+  | < DIV >
+    {
+      result = new Division(a, term());
+    }
+  )*
+  {
+    if (result != null) 
+    return result;
+    return a;
+  }
+}
+
+IndicadorInterface factor() :
+{
+  Token t;
+  IndicadorInterface result = null;
+}
+{
+  t = < INVERSION >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < INGRESOSCONT >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < INGRESOSDISCONT >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < DIVIDENDOS >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < DEUDA >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < MARGENVENTA >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < ROA >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < TIR >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < RECUPEROINV >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < CAPITAL >
+  {
+    return new ParametroCuenta(t.image);
+  }
+| t = < INT >
+  {
+    return new Constante(Integer.parseInt(t.image));
+  }
+| < LBR > result = expr() < RBR >
+  {
+    return result;
+  }
+| t = < INDICADOR >
+  {
+    return _context.obtenerIndicadorSegunNombre(t.image);
+  }
+| < EOF >
+  {
+    return null;
+  }
+}
+
+String nombre() :
+{
+  Token t;
+}
+{
+  t = < INDICADOR >
+  {
+    return t.image;
+  }
+}
+
+IndicadorInterface asignacion() :
+{
+  IndicadorInterface a;
+}
+{
+  (
+  < IGU >
+  {
+  }
+  ) 
+  a = expr()
+  {
+    return a;
+  }
+}
+
+CondicionInterface condicion() :
+{
+  Token t;
+  IndicadorInterface expresionPrefija = expr();
+  CondicionInterface result;
+}
+{
+(
+  t = < LOWER >
+  {
+    result = new CondicionMenor(expresionPrefija, expr());
+  }
+| t = < LOWEREQUAL >
+  {
+    result = new CondicionMenorIgual(expresionPrefija, expr());
+  }
+| t = < GREATER >
+  {
+    result = new CondicionMayor(expresionPrefija, expr());
+  }
+| t = < GREATEREQUAL >
+  {
+    result = new CondicionMayorIgual(expresionPrefija, expr());
+  }
+| t = < EQUAL >
+  {
+    result = new CondicionIgual(expresionPrefija, expr());
+  }
+)
+  {
+	return result;
+  }
+}

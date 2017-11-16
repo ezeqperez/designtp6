@@ -1,0 +1,55 @@
+<html>
+  	<head>
+    	<title>Gestor de Cuentas</title>
+  	</head>
+  	<body class="background">
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/home">
+							<i class="material-icons" style="width:50px;">home</i>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/cuentas">
+							Cuentas
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/indicadores">
+							Indicadores
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/metodologias">
+							Metodologias
+						</a>
+					</li>
+				</ul>
+				<div class"inline" style="width:26%;float:right">
+					<label style="padding-right:10px;" >
+						{{username}}
+					</label>
+					<i class="material-icons" style="width:15px;vertical-align:middle;padding-right:40px;">person pin</i>
+					<a style="color:black" href="/logout"><i class="material-icons" style="width:15px;vertical-align:middle;padding-right:0px;">lock</i></a>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container" style="padding-top:50px;">
+  			{{# block "contenido" }}
+  			{{/block}}
+  		</div>
+
+  	</body>
+    <footer>
+        <p class="footer">
+            &copy; 2017 - Gestor de Cuentas - Grupo 21
+        </p>
+    </footer>
+</html>

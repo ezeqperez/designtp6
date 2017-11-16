@@ -1,0 +1,33 @@
+{{# partial "contenido" }}	  
+<div>
+	<div class="inline" font="Arial";style="width:100%;float:right;align-content: flex-end;display: flex;">
+		<h3 style="padding-left:40px;padding-right:40px;">Cuentas</h3>
+  	</div>
+  	<br>
+    <br>
+	<form action="/cuentas" method="GET">
+	  	<div class="col-md-12" style="padding-top:15px;padding-left:40px;padding-right:40px; height:40%">
+            <table class="table table-hover">
+                <thead class="thead-default">
+                <tr>
+                    <th>Empresa</th>
+                    <th>Periodo</th>
+                    <th>Semestre</th>
+                <tr>
+                </thead>
+                <tbody>
+                {{#cuentas}}
+                    <tr>
+                        <td>{{compania}}</td>
+                        <td>{{cuenta.periodo}}</td>
+                        <td>{{cuenta.semestre}}</td>
+                    </tr>
+                {{/cuentas}}
+                </tbody>
+            </table>
+		</div>
+	</form>
+</div>	
+{{/partial}}
+				
+{{> main_layout.hbs }}

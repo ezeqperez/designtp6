@@ -1,0 +1,27 @@
+{{# partial "contenido" }}	  
+<div class="container">
+	<div>
+		<h3 align="center">Resultado de aplicar metodología</h3>
+	</div>
+	<br>
+  	<div class="col-md-12" style="padding-top:10px; height:40%">
+		<table class="table table-bordered table-inverse">
+			<thead>
+				<tr>
+					<th>Empresas que cumplen la metodologia:</th>
+				<tr>
+			</thead>
+			<tbody>
+			{{#cuentas}}
+				<tr>
+					<td>{{nombre}}</td>
+				</tr>
+			{{/cuentas}}
+			</tbody>
+		</table>
+        <a class="btn"  href="/metodologias" style="width:80px" >Volver</a>
+    </div>
+</div>	
+{{/partial}}
+				
+{{> main_layout.hbs }}

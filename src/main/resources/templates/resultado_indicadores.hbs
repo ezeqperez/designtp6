@@ -1,0 +1,30 @@
+{{# partial "contenido" }}	  
+<div class="container">
+	<br>
+	<div>
+		<h3 align="center">Resultado de aplicar indicador</h3>
+	</div>
+	<br>
+  	<div class="col-md-12" style="padding-top:10px; height:40%">
+        <table class="table table-hover">
+            <thead class="thead-default">
+				<tr>
+					<th>Empresa</th>
+					<th>Resultado</th>
+				<tr>
+			</thead>
+			<tbody class="thead-default">
+			{{#cuentas}}
+				<tr>
+					<td>{{empresa}}</td>
+					<td>{{resultado}}</td>
+				</tr>
+			{{/cuentas}}
+			</tbody>
+		</table>
+        <a class="btn" onclick="href='/indicadores'">Volver</a>
+    </div>
+</div>	
+{{/partial}}
+				
+{{> main_layout.hbs }}

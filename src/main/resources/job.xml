@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<batch:job id="importFileJob" job-repository="jobRepository">
+		<batch:step id="importFileStep">
+			<batch:tasklet>
+				<batch:chunk reader="CuentasReader" writer="CuentasWritter"
+					commit-interval="20">
+				</batch:chunk>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+	<!-- Reader, destacar que se salta la línea de las cabeceras -->
+
+	<bean id="CuentasReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="${file}" />
+		<property name="encoding" value="utf8" />
+		<property name="lineMapper" ref="CuentasImporterMapper" />
+		<property name="linesToSkip" value="0" />
+	</bean>
+
+	<!-- Mapeo de cada fila del fichero -->
+	<bean id="CuentasImporterMapper"
+		class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+		<property name="fieldSetMapper" ref="CuentasAutoFieldSetMapper" />
+		<property name="lineTokenizer">
+			<bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+				<property name="names"
+					value="periodo, semestre, compania, anioCreacion, inversionInicial, ingresosContinuos, ingresosDiscontinuos, capitalTotal, dividendos, deuda, margenVenta, roa, tir, recuperoInversion" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Mapeo de campos y objeto a mapear -->
+	<bean id="CuentasAutoFieldSetMapper"
+		class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+		<property name="prototypeBeanName" value="CuentaBean" />
+	</bean>
+
+	<bean id="CuentaBean" class="org.grupo21.Utils.CuentaCsvObject"
+		scope="prototype" />
+
+	<!-- Writer -->
+	<bean id="CuentasWritter" class="org.grupo21.Batch.CuentasWritter" />
+
+</beans>
